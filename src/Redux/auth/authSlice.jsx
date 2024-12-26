@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {axiosInstance} from '../../lib/axiosInstance';
-import axios from 'axios';
 
 const initialState = {
     user: [],
@@ -26,12 +25,9 @@ export const authSlice = createSlice({
     initialState,
     reducers:{
         resetstate: (state) => {
-            state.user = null;
+            state.user = [];
             state.loading = true;
         },
-        setuser: (state, action) => {
-            state.user = action.payload;
-        }
     },
     extraReducers: (builder) => {
         builder

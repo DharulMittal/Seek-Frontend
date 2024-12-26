@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import './App.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { checkauth } from './Redux/auth/authSlice'
-import { BiLoaderAlt} from "react-icons/bi";
+import { BiLoaderAlt } from "react-icons/bi";
 import { Route, Routes, Navigate } from 'react-router';
 import Homepage from './pages/Homepage';
 import Loginpage from './pages/Loginpage.jsx';
 import Signup from './pages/signup';
 import Setting from './pages/setting';
-import Test from './pages/Test';
 import Profile from './pages/profile';
-import {Toaster} from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar.jsx';
 
 function App() {
@@ -35,13 +34,12 @@ function App() {
       </div> */}
       <Navbar />
       <Routes>
-        <Route path='/' element={user.username ? <Homepage /> : <Navigate to = "/login"/>} />
+        <Route path='/' element={user.username ? <Homepage /> : <Navigate to="/login" />} />
         {/* <Route path='/' element={user.username ? <Homepage /> : navigate("/login")} /> */}
-        <Route path='/login' element={!user.username ? <Loginpage /> : <Navigate to = "/"/> } />
-        <Route path='/signup' element={!user.username ? <Signup /> : <Navigate to = "/"/>} />
-        <Route path='/setting' element={user.username ? <Setting /> : <Navigate to = "/login"/>} />
-        <Route path='/profile' element={user.username ? <Profile /> : <Navigate to = "/login"/>} />
-        <Route path='/test' element={<Test />}/>
+        <Route path='/login' element={!user.username ? <Loginpage /> : <Navigate to="/" />} />
+        <Route path='/signup' element={!user.username ? <Signup /> : <Navigate to="/" />} />
+        <Route path='/setting' element={<Setting />} />
+        <Route path='/profile' element={user.username ? <Profile /> : <Navigate to="/login" />} />
       </Routes>
 
       <Toaster />

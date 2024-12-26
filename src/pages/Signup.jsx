@@ -6,7 +6,7 @@ import { NavLink } from 'react-router';
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import { axiosInstance } from '../lib/axiosInstance';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { checkauth } from '../Redux/auth/authSlice';
 
 const Signup = () => {
@@ -20,17 +20,9 @@ const Signup = () => {
   const dispatch = useDispatch();
   const [showpass, setshowpass] = useState(false)
 
-  const delay = (d) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, d * 1000);
-    })
-  }
-
   const signingup = async (data) => {
     try {
-      const Response = await axiosInstance.post("api/auth/signup", data);
+      const response = await axiosInstance.post("api/auth/signup", data);
       toast.success("Account Created Successfully", { position: "top-center" })
       dispatch(checkauth());
     } catch (error) {
@@ -40,7 +32,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className='border-2 border-black rounded-[10px] m-[10px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-[beige] sm:w-[90%] lg:w-[40%] md:w-[60%]'>
+      <div className='border-2 border-black rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-[beige] sm:w-[90%] lg:w-[40%] md:w-[60%]'>
         
         <div className='text-center text-3xl font-bold'>Create Account</div>
 
