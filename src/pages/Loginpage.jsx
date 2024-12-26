@@ -26,7 +26,7 @@ const Loginpage = () => {
       toast.success("Loged in Successfully", { position: "top-center" })
       dispatch(checkauth());
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error)
     }
   };
 

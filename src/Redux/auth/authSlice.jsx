@@ -28,6 +28,9 @@ export const authSlice = createSlice({
             state.user = [];
             state.loading = true;
         },
+        setuser: (state,action) => {
+            state.user = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
