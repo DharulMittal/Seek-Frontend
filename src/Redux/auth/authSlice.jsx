@@ -11,7 +11,7 @@ export const checkauth = createAsyncThunk(
     'auth/checkauth',
     async (url,{rejectWithValue}) => {
         try {
-            const response = await axiosInstance.get('api/auth//');
+            const response = await axiosInstance.get('api/auth/check/');
             return response;
 
         } catch (error) {
@@ -28,6 +28,9 @@ export const authSlice = createSlice({
         resetstate: (state) => {
             state.user = null;
             state.loading = true;
+        },
+        setuser: (state, action) => {
+            state.user = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -45,6 +48,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const {resetstate} = authSlice.actions;
+export const {resetstate,setuser} = authSlice.actions;
 
 export default authSlice.reducer;
