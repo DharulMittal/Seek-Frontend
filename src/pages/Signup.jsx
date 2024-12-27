@@ -32,7 +32,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className='border-2 border-black rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-[beige] sm:w-[90%] lg:w-[40%] md:w-[60%]'>
+      <div className='border-[1px] border-base-300 shadow-sm rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-base-200 text-base-content sm:w-[90%] lg:w-[40%] md:w-[60%]'>
         
         <div className='text-center text-3xl font-bold'>Create Account</div>
 
@@ -42,7 +42,7 @@ const Signup = () => {
             <input
               className="myinputbox"
               type="text"
-              {...register("username", { required: { value: true, message: "This field is required" }, minLength: { value: 3, message: "Min length is 3" }, maxLength: { value: 8, message: "Max length is 8" } })}
+              {...register("username", { required: { value: true, message: "This field is required" }, minLength: { value: 3, message: "Min length is 3" }, maxLength: { value: 30, message: "Max length is 30" } })}
               placeholder="Username" />
           </div>
             {errors.username && <p className='text-red-500 text-center'>{errors.username.message}</p>}
@@ -76,7 +76,7 @@ const Signup = () => {
             {errors.password && <p className='text-red-500 text-center text-sm p-0 m-0'>{errors.password.message}</p>}
           
           <div className='flex justify-around my-[5px]'>
-            <button type='submit' disabled={isSubmitting} className={isSubmitting?"bg-gray-500 myinputbox w-[50%]":"bg-[#1adaad] myinputbox w-[50%]"} >{isSubmitting ? "Loading..." : "Create Account"}</button>
+            <button type='submit' disabled={isSubmitting} className={isSubmitting?"bg-gray-500 myinputbox w-[50%]":"bg-primary text-primary-content myinputbox w-[50%]"} >{isSubmitting ? "Loading..." : "Create Account"}</button>
           </div>
         
         </form>

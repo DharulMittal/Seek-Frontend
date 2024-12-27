@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from '../components/Sidebar'
+import NoChat from '../components/NoChat'
 
 const Homepage = () => {
   return (
-    <div>
-      home
+    <div className='h-[95vh] flex'>
+        <Sidebar/>
+        <NoChat/>
     </div>
   )
 }

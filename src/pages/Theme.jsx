@@ -104,7 +104,7 @@ const Theme = () => {
             <div className='flex gap-1 justify-center'>
               <div className='border-[2px] border-base-200 w-[85%] my-2 rounded-xl text-start px-5 py-1 text-base-content/85 bg-base-200'>What about you ??</div>
               <div className='border-[2px] border-base-200 w-10 h-10 rounded-xl flex flex-col justify-center items-center my-2 bg-primary-100 bg-primary'>
-                <IoMdSend className='h-7 w-7'/>
+                <IoMdSend className='h-7 w-7 text-primary-content'/>
               </div>
             </div>
 

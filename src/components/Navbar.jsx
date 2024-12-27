@@ -26,7 +26,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-between bg-[beige] p-[10px]'>
+        <div className='flex justify-between bg-base-200 text-base-content p-[10px] sticky top-0 z-10'>
             <NavLink to={"/"} className='md:mx-10 sm:mx-5 mx-3 flex gap-1 justify-center'>
                 <PiChatsBold className='w-6 h-6'/>
                 Seek

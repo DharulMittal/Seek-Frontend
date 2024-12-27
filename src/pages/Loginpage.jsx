@@ -33,7 +33,7 @@ const Loginpage = () => {
 
   return (
     <>
-      <div className='border-2 border-black rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-[beige] sm:w-[90%] lg:w-[40%] md:w-[60%]'>
+      <div className='border-[1px] shadow-sm border-base-300 rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-base-200 sm:w-[90%] lg:w-[40%] md:w-[60%] text-base-content'>
 
         <div className='text-center text-3xl font-bold'>Login</div>
 
@@ -68,7 +68,7 @@ const Loginpage = () => {
           {errors.password && <p className='text-red-500 text-center text-sm p-0 m-0'>{errors.password.message}</p>}
 
           <div className='flex justify-around my-[5px]'>
-            <button type='submit' disabled={isSubmitting} className={isSubmitting ? "bg-gray-500 myinputbox w-[50%]" : "bg-[#1adaad] myinputbox w-[50%]"} >{isSubmitting ? "Loading..." : "Login"}</button>
+            <button type='submit' disabled={isSubmitting} className={isSubmitting ? "bg-gray-500 myinputbox w-[50%]" : "bg-primary text-primary-content myinputbox w-[50%]"} >{isSubmitting ? "Loading..." : "Login"}</button>
           </div>
 
         </form>

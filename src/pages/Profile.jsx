@@ -60,14 +60,14 @@ const Profile = () => {
 
   return (
     <>
-      <div className='border-2 border-black rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-[beige] sm:w-[90%] lg:w-[40%] md:w-[60%]'>
+      <div className='border-[1px] border-base-300 rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-base-200 sm:w-[90%] lg:w-[40%] md:w-[60%] text-base-content'>
 
         <div className='text-center text-2xl font-bold'>Profile</div>
 
         <div className='flex justify-center mt-[10px] relative'>
-          <img src={selectedimg || user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-black object-cover rounded-full size-32 ' />
+          <img src={selectedimg || user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full size-32 ' />
           <label htmlFor="pfpupload">
-            <IoCameraOutline className='h-7 w-7 absolute bottom-2 right-[40%] border-2 border-black rounded-full bg-slate-100' />
+            <IoCameraOutline className='h-7 w-7 absolute bottom-2 right-[40%] border-[1px] border-base-200 rounded-full bg-base-200/50' />
           </label>
           <input type="file" id='pfpupload' className='hidden' accept="image/*" disabled={updating} onChange={handleupload} />
         </div>
@@ -78,6 +78,7 @@ const Profile = () => {
           </div>
           <input
             className='flex justify-between myinputbox w-full text-left px-[20px]'
+            id='usernamebox'
             value={uname}
             disabled={!updating}
             onChange={(e) => setuname(e.target.value)}
@@ -87,7 +88,7 @@ const Profile = () => {
               }
             }}
           />
-          <TbUserEdit className='h-4 w-4 absolute right-[2%] bottom-[12.5%]' onClick={() => { setupdating(!updating) }} disabled={updating} />
+          <TbUserEdit className='h-4 w-4 absolute right-[2%] bottom-[12.5%]' onClick={() => {setupdating(!updating) }} disabled={updating} />
         </div>
 
         <div className='mx-10 mb-2'>
