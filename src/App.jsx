@@ -7,13 +7,15 @@ import { Route, Routes, Navigate } from 'react-router';
 import Homepage from './pages/Homepage';
 import Loginpage from './pages/Loginpage.jsx';
 import Signup from './pages/signup';
-import Setting from './pages/setting';
+import Theme from './pages/Theme';
 import Profile from './pages/profile';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar.jsx';
+import { settheme } from './Redux/theme/themeSlice.jsx';
 
 function App() {
   const { user, loading } = useSelector((state) => state.auth);
+  const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   // let navigate = useNavigate();
 
@@ -28,22 +30,18 @@ function App() {
   }
 
   return (
-    <>
-      {/* <div className='text-center text-red-600 text-3xl'>
-        hellooooooo :{user.username}:{loading ? 'loading' : 'not loading'}:{user.username ? 'user' : 'no user'}
-      </div> */}
+    <div data-theme={theme}>
       <Navbar />
       <Routes>
         <Route path='/' element={user.username ? <Homepage /> : <Navigate to="/login" />} />
         {/* <Route path='/' element={user.username ? <Homepage /> : navigate("/login")} /> */}
         <Route path='/login' element={!user.username ? <Loginpage /> : <Navigate to="/" />} />
         <Route path='/signup' element={!user.username ? <Signup /> : <Navigate to="/" />} />
-        <Route path='/setting' element={<Setting />} />
+        <Route path='/theme' element={<Theme />} />
         <Route path='/profile' element={user.username ? <Profile /> : <Navigate to="/login" />} />
       </Routes>
-
       <Toaster />
-    </>
+    </div>
   )
 }
 

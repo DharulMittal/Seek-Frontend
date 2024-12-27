@@ -5,7 +5,9 @@ import { LuSettings } from "react-icons/lu";
 import { NavLink } from 'react-router';
 import { axiosInstance } from '../lib/axiosInstance';
 import { useSelector, useDispatch } from 'react-redux'
-import { checkauth,resetstate } from '../Redux/auth/authSlice';
+import { checkauth, resetstate } from '../Redux/auth/authSlice';
+import { VscColorMode } from "react-icons/vsc";
+import { PiChatsBold } from "react-icons/pi";
 import toast from 'react-hot-toast';
 
 const Navbar = () => {
@@ -24,16 +26,17 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-between bg-[beige] '>
-            <NavLink to={"/"} className='md:mx-10 sm:mx-5 mx-3'>
-                logo
+        <div className='flex justify-between bg-[beige] p-[10px]'>
+            <NavLink to={"/"} className='md:mx-10 sm:mx-5 mx-3 flex gap-1 justify-center'>
+                <PiChatsBold className='w-6 h-6'/>
+                Seek
             </NavLink>
             <div className='md:mx-10 sm:mx-5 mx-3'>
                 <ul className='flex space-x-5'>
                     <li>
-                        <NavLink to={"/setting"} className='sm:flex sm:items-center'>
-                            <LuSettings />
-                            <span className='hidden sm:inline'>Setting</span>
+                        <NavLink to={"/Theme"} className='sm:flex sm:items-center'>
+                            <VscColorMode />
+                            <span className='hidden sm:inline'>Theme</span>
                         </NavLink>
                     </li>
                     {user.username && (
@@ -45,7 +48,7 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <button onClick={() => {Logout()}} className='sm:flex sm:items-center'>
+                                <button onClick={() => { Logout() }} className='sm:flex sm:items-center'>
                                     <FiLogOut />
                                     <span className='hidden sm:inline'>Logout</span>
                                 </button>

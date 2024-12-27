@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { checkauth, setuser } from '../Redux/auth/authSlice'
+import { checkauth } from '../Redux/auth/authSlice'
 import { axiosInstance } from '../lib/axiosInstance'
 import { IoCameraOutline } from "react-icons/io5";
 import { BsPersonFill } from "react-icons/bs";

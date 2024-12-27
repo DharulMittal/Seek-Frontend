@@ -26,7 +26,8 @@ const Loginpage = () => {
       toast.success("Loged in Successfully", { position: "top-center" })
       dispatch(checkauth());
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      toast.error("Incorrect Credentials")
     }
   };
 
