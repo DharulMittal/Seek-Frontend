@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className='w-[25%] bg-base-100 h-full text-base-content'>
+            <div className='w-[25%] bg-base-200 h-full text-base-content border-[2px] border-base-300 shadow-sm'>
                 <div className='flex gap-2 px-5 py-2'>
                     <HiUserGroup className='h-6 w-6 flex flex-col justify-center' />
                     <div className='text-xl font-semibold'>Chats</div>
@@ -32,8 +32,8 @@ const Sidebar = () => {
                         users.map((user)=>(
                             <button 
                             key={user._id}
-                            className={`flex gap-2 px-2 py-1  w-[100%] items-center ${selecteduser == user._id ? "bg-base-300" : ""}`}
-                            onClick={() => dispatch(setSelecteduser(user._id))}
+                            className={`flex gap-2 px-2 py-1  w-[100%] items-center ${selecteduser?._id == user._id ? "bg-base-300" : ""}`}
+                            onClick={() => dispatch(setSelecteduser(user))}
                             >
                                 <div>
                                     <img src={user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full size-[55px] ' />
