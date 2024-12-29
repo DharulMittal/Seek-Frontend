@@ -1,20 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setSelecteduser, getmsg } from '../Redux/message/msgSlice'
+import { setSelecteduser, getmsg, livemsgs } from '../Redux/message/msgSlice'
 import { IoClose } from "react-icons/io5";
-import { axiosInstance } from '../lib/axiosInstance'
-import { IoMdSend } from "react-icons/io";
 import LoadingMsgs from './Loding/LoadingMsgs';
 import Inputbox from './Inputbox';
+import { BsPass } from 'react-icons/bs';
 
 const ChatContainer = () => {
   const { user } = useSelector((state) => state.auth);
+  const { onlineusers } = useSelector((state) => state.auth);
+  const [filteredmsgs, setfilteredmsgs] = useState([])
+
   const { msgs, selecteduser, loadingmsg } = useSelector((state) => state.msg);
   const dispatch = useDispatch();
 
+  const messageEndRef = useRef(null);
+
   useEffect(() => {
     dispatch(getmsg(selecteduser._id))
-  }, [dispatch, selecteduser])
+  }, [dispatch, selecteduser,])
+
+  useEffect(() => {
+    const filteredmsgs = msgs.filter((msg) => (
+      (msg.sender === selecteduser._id && msg.reciever === user._id) || (msg.sender === user._id && msg.reciever === selecteduser._id) 
+    ))
+    setfilteredmsgs(filteredmsgs);
+  }, [msgs,selecteduser]);
+
+  useEffect(() => {
+    if (messageEndRef.current && filteredmsgs) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [filteredmsgs]);
 
   if (loadingmsg) return (
     <>
@@ -34,7 +51,9 @@ const ChatContainer = () => {
             </div>
             <div className='flex flex-col'>
               <div className=' text-lg text-start'>{selecteduser.username}</div>
-              <p className='text-sm text-start'>Onlien</p>
+              <p className='text-sm text-start'>
+                {onlineusers?.includes(selecteduser._id) ? "Online" : "Offline"}
+              </p>
             </div>
           </div>
           <button className='' onClick={() => dispatch(setSelecteduser(null))}>
@@ -44,13 +63,17 @@ const ChatContainer = () => {
 
         <div className=' bg-base-100 text-base-content overflow-y-auto w-[100%] h-[100%] px-5 py-3 '>
           {
-            msgs.map(msg => (
-              <div key={msg._id} className={`chat ${msg.sender == user._id ? "chat-end" : "chat-start"}`}>
+            filteredmsgs.map(msg => (
+              <div 
+                key={msg._id} 
+                ref= {messageEndRef}
+                className={`chat ${msg.sender == user._id ? "chat-end" : "chat-start"}`}
+              >
                 <div className='chat-image avatar size-10 '>
                   <img src={msg.sender == user._id ? user.pfp : selecteduser.pfp} alt="pfp" className=' rounded-full' />
                 </div>
 
-                <div className={`chat-bubble px-2 py-1 ${msg.sender == user._id ? "bg-primary text-primary-content" : "bg-base-300 text-base-content"}`}>
+                <div className={`chat-bubble rounded-lg px-2 py-1 ${msg.sender == user._id ? "bg-primary text-primary-content" : "bg-base-300 text-base-content"}`}>
                   {msg.img && (
                     <img src={msg.img} alt="img" className='size-40 p-0 m-0' />
                   )}

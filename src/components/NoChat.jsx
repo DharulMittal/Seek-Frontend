@@ -5,7 +5,7 @@ import { PiChatsBold } from "react-icons/pi";
 const NoChat = () => {
     return (
         <>
-            <div className='w-[75%] bg-base-100 h-full border-[2px] shadow-sm border-base-300 flex flex-col justify-center items-center relative text-base-content'>
+            <div className='w-[90%] md:w-[75%] bg-base-100 h-full border-[2px] shadow-sm border-base-300 flex flex-col justify-center items-center relative text-base-content'>
                 <PiChatsBold className='w-10 h-10 animate-bounce'/>
                 <div className='text-3xl font-bold'>Welcome to Seek</div>
                 <div>Send and receive messages without keeping your phone online.</div>

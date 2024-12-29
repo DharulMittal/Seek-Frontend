@@ -1,7 +1,7 @@
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { checkauth } from './Redux/auth/authSlice'
+import { checkauth, connectSocket } from './Redux/auth/authSlice'
 import { BiLoaderAlt } from "react-icons/bi";
 import { Route, Routes, Navigate } from 'react-router';
 import Homepage from './pages/Homepage';
@@ -11,7 +11,7 @@ import Theme from './pages/Theme';
 import Profile from './pages/profile';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar.jsx';
-import { settheme } from './Redux/theme/themeSlice.jsx';
+import { livemsgs } from './Redux/message/msgSlice.jsx';
 
 function App() {
   const { user, loading } = useSelector((state) => state.auth);
@@ -20,7 +20,19 @@ function App() {
   // let navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(checkauth());
+    // dispatch(checkauth())
+    // dispatch(connectSocket());
+    const initialize = async () => {
+      try {
+        await dispatch(checkauth()).unwrap();
+        await dispatch(connectSocket()).unwrap();
+        dispatch(livemsgs())
+      } catch (error) {
+        console.error("Error during initialization:", error);
+      }
+    };
+    initialize();    
+
   }, [dispatch]);
 
   if (loading) {

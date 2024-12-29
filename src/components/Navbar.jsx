@@ -5,7 +5,7 @@ import { LuSettings } from "react-icons/lu";
 import { NavLink } from 'react-router';
 import { axiosInstance } from '../lib/axiosInstance';
 import { useSelector, useDispatch } from 'react-redux'
-import { checkauth, resetstate } from '../Redux/auth/authSlice';
+import { checkauth, disconnectSocket, resetstate } from '../Redux/auth/authSlice';
 import { VscColorMode } from "react-icons/vsc";
 import { PiChatsBold } from "react-icons/pi";
 import toast from 'react-hot-toast';
@@ -18,6 +18,7 @@ const Navbar = () => {
         try {
             const response = await axiosInstance.post("api/auth/logout");
             toast.success("Loged Out Successfully", { position: "top-center" })
+            dispatch(disconnectSocket());
             dispatch(resetstate());
             dispatch(checkauth());
         } catch (error) {

@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import { axiosInstance } from '../lib/axiosInstance';
 import { useDispatch } from 'react-redux'
-import { checkauth } from '../Redux/auth/authSlice';
+import { checkauth, connectSocket } from '../Redux/auth/authSlice';
 
 const Signup = () => {
   const {
@@ -24,7 +24,8 @@ const Signup = () => {
     try {
       const response = await axiosInstance.post("api/auth/signup", data);
       toast.success("Account Created Successfully", { position: "top-center" })
-      dispatch(checkauth());
+      await dispatch(checkauth()).unwrap();
+      await dispatch(connectSocket()).unwrap();
     } catch (error) {
       console.log(error.response.data)
     }
@@ -33,11 +34,11 @@ const Signup = () => {
   return (
     <>
       <div className='border-[1px] border-base-300 shadow-sm rounded-[10px] m-[0px] py-[10px] h-[94vh] mx-auto flex flex-col justify-center bg-base-200 text-base-content sm:w-[90%] lg:w-[40%] md:w-[60%]'>
-        
+
         <div className='text-center text-3xl font-bold'>Create Account</div>
 
         <form onSubmit={handleSubmit(signingup)}>
-        
+
           <div className='flex justify-around mt-[5px]'>
             <input
               className="myinputbox"
@@ -45,7 +46,7 @@ const Signup = () => {
               {...register("username", { required: { value: true, message: "This field is required" }, minLength: { value: 3, message: "Min length is 3" }, maxLength: { value: 30, message: "Max length is 30" } })}
               placeholder="Username" />
           </div>
-            {errors.username && <p className='text-red-500 text-center'>{errors.username.message}</p>}
+          {errors.username && <p className='text-red-500 text-center'>{errors.username.message}</p>}
 
           <div className='flex justify-around mt-[5px]'>
             <input
@@ -55,14 +56,14 @@ const Signup = () => {
               {...register("email", { required: { value: true, message: "This field is required" }, pattern: { value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Invalid email" } })}
             />
           </div>
-            {errors.email && <p className='text-red-500 text-center'>{errors.email.message}</p>}
+          {errors.email && <p className='text-red-500 text-center'>{errors.email.message}</p>}
 
           <div className='flex justify-around mt-[5px] relative '>
             <input
               type={showpass ? "text" : "password"}
               className='myinputbox'
               placeholder="password"
-              onKeyDown={(e) => { 
+              onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleSubmit(signingup)();
                 }
@@ -73,12 +74,12 @@ const Signup = () => {
               {showpass ? <FaLockOpen /> : <FaLock />}
             </button>
           </div>
-            {errors.password && <p className='text-red-500 text-center text-sm p-0 m-0'>{errors.password.message}</p>}
-          
+          {errors.password && <p className='text-red-500 text-center text-sm p-0 m-0'>{errors.password.message}</p>}
+
           <div className='flex justify-around my-[5px]'>
-            <button type='submit' disabled={isSubmitting} className={isSubmitting?"bg-gray-500 myinputbox w-[50%]":"bg-primary text-primary-content myinputbox w-[50%]"} >{isSubmitting ? "Loading..." : "Create Account"}</button>
+            <button type='submit' disabled={isSubmitting} className={isSubmitting ? "bg-gray-500 myinputbox w-[50%]" : "bg-primary text-primary-content myinputbox w-[50%]"} >{isSubmitting ? "Loading..." : "Create Account"}</button>
           </div>
-        
+
         </form>
 
         <div className='text-center'>

@@ -4,7 +4,6 @@ import { IoMdSend } from "react-icons/io";
 import { AiFillPicture } from "react-icons/ai";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import toast from 'react-hot-toast';
-import { axiosInstance } from '../lib/axiosInstance';
 import { sendmsg } from '../Redux/message/msgSlice';
 
 const Inputbox = () => {

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { axiosInstance } from '../../lib/axiosInstance';
+import toast from 'react-hot-toast';
 
 const initialState = {
     msgs: [],
@@ -51,12 +52,56 @@ export const sendmsg = createAsyncThunk(
     }
 )
 
+export const livemsgs = createAsyncThunk(
+    'msg/livemsgs',
+    async (url, { dispatch, getState, rejectWithValue }) => {
+        try {
+            const state = getState();
+            const socketvar = state.auth.socketvar;
+
+            socketvar.on("newmsgs", (message) => {
+                const msg = message;
+                dispatch(setmsgs(msg));
+                // console.log(msg)
+            });
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error);
+        }
+    }
+)
+export const offlivemsgs = createAsyncThunk(
+    'msg/offlivemsgs',
+    async (url, { dispatch, getState, rejectWithValue }) => {
+        try {
+            const state = getState();
+            const socketvar = state.auth.socketvar;
+
+            socketvar.iff("newmsgs");
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error);
+        }
+    }
+)
+
 export const msgSlice = createSlice({
     name: 'msg',
     initialState,
     reducers: {
         setSelecteduser: (state, action) => {
             state.selecteduser = action.payload;
+        },
+        setmsgs: (state, action) => {
+            state.msgs = [...state.msgs, action.payload];
+            // toast.success(action.payload.sender+"\n"+action.payload.text,{position:"bottom-right"})     
+            toast((t) => (
+                <button className='' onClick={() => state.selecteduser = action.payload.sender }>
+                    {action.payload.text}
+                </button>
+            ), { position: "bottom-right" });
         }
     },
     extraReducers: (builder) => {
@@ -97,9 +142,12 @@ export const msgSlice = createSlice({
                 state.sending = false;
             });
 
+        builder
+            .addCase(livemsgs.fulfilled, (state, action) => {
+            })
     }
 });
 
-export const { setSelecteduser } = msgSlice.actions;
+export const { setSelecteduser, setmsgs } = msgSlice.actions;
 
 export default msgSlice.reducer;

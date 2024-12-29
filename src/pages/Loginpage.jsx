@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import { axiosInstance } from '../lib/axiosInstance';
 import { useDispatch } from 'react-redux'
-import { checkauth } from '../Redux/auth/authSlice';
+import { checkauth, connectSocket } from '../Redux/auth/authSlice';
 
 const Loginpage = () => {
   const {
@@ -24,9 +24,9 @@ const Loginpage = () => {
     try {
       const response = await axiosInstance.post("api/auth/login", data);
       toast.success("Loged in Successfully", { position: "top-center" })
-      dispatch(checkauth());
+      await dispatch(checkauth()).unwrap();
+      await dispatch(connectSocket()).unwrap();
     } catch (error) {
-      // console.log(error)
       toast.error("Incorrect Credentials")
     }
   };
