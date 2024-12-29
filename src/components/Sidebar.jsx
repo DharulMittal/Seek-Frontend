@@ -21,7 +21,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className='w-[10%] md:w-[25%] bg-base-200 h-full text-base-content border-[2px] border-base-300 shadow-sm'>
+            <div className='w-[10%] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm'>
                 <div className='flex gap-2 px-5 py-2'>
                     <HiUserGroup className='h-6 w-6 flex flex-col justify-center' />
                     <div className='text-xl font-semibold hidden md:inline-block'>Chats</div>

@@ -36,7 +36,7 @@ import "./Styles/tailwind.css";
 // ]);
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
+  <StrictMode>
     <Provider store={store}>
       {/* <App /> */}
       {/* <RouterProvider router={router} /> */}
@@ -44,5 +44,5 @@ createRoot(document.getElementById('root')).render(
         <App />
       </BrowserRouter>
     </Provider>
-  // </StrictMode>
+  </StrictMode>
 )
