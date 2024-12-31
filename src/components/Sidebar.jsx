@@ -15,13 +15,13 @@ const Sidebar = () => {
 
     useEffect(() => {
       dispatch(getusers())
-    }, [dispatch])
+    }, [dispatch,onlineusers])
     
     if (loadingusers) return <LoadingSidebar/>
 
     return (
         <>
-            <div className='w-[10%] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm'>
+            <div className='w-[17.5%] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm'>
                 <div className='flex gap-2 px-5 py-2'>
                     <HiUserGroup className='h-6 w-6 flex flex-col justify-center' />
                     <div className='text-xl font-semibold hidden md:inline-block'>Chats</div>
@@ -37,7 +37,7 @@ const Sidebar = () => {
                             onClick={() => dispatch(setSelecteduser(user))}
                             >
                                 <div className='relative'>
-                                    <img src={user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full size-[55px] ' />
+                                    <img src={user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full  size-[100%] sm:size-[55px] ' />
                                     <div className={onlineusers?.includes(user._id) ?'rounded-full bg-green-600 size-3 absolute bottom-0 right-1' : "hidden"}></div>
                                 </div>
                                 <div className='flex flex-col gap-0 hidden md:block'>

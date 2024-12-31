@@ -70,7 +70,7 @@ const ChatContainer = () => {
                 className={`chat ${msg.sender == user._id ? "chat-end" : "chat-start"}`}
               >
                 <div className='chat-image avatar size-10 '>
-                  <img src={msg.sender == user._id ? user.pfp : selecteduser.pfp} alt="pfp" className=' rounded-full' />
+                  <img src={msg.sender == user._id ? user.pfp || "/avatar.png" : selecteduser.pfp || "/avatar.png"} alt="" className=' rounded-full' />
                 </div>
 
                 <div className={`chat-bubble rounded-lg px-2 py-1 ${msg.sender == user._id ? "bg-primary text-primary-content" : "bg-base-300 text-base-content"}`}>

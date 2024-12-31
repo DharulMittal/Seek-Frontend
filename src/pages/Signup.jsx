@@ -68,7 +68,11 @@ const Signup = () => {
                   handleSubmit(signingup)();
                 }
               }}
-              {...register("password", { required: { value: true, message: "This field is required" }, minLength: { value: 6, message: "Min length is 6" }, maxLength: { value: 20, message: "Max length is 20" } })}
+              {...register("password", { required: { value: true, message: "This field is required" }, minLength: { value: 6, message: "Min length is 6" }, maxLength: { value: 20, message: "Max length is 20" },pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+                message:
+                  "1 uppercase, 1 lowercase , and 1 number",
+              } })}
             />
             <button type='button' className='absolute right-[16%] py-[12.5px]' onClick={() => { setshowpass(!showpass) }}>
               {showpass ? <FaLockOpen /> : <FaLock />}
