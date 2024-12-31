@@ -85,7 +85,6 @@ export const authSlice = createSlice({
     reducers: {
         resetstate: (state) => {
             state.user = [];
-            state.loading = true;
         },
         setuser: (state, action) => {
             state.user = action.payload;

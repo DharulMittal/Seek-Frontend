@@ -2,7 +2,7 @@ import React from 'react'
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { LuSettings } from "react-icons/lu";
-import { NavLink } from 'react-router';
+import { Navigate, NavLink } from 'react-router';
 import { axiosInstance } from '../lib/axiosInstance';
 import { useSelector, useDispatch } from 'react-redux'
 import { checkauth, disconnectSocket, resetstate } from '../Redux/auth/authSlice';
@@ -20,7 +20,6 @@ const Navbar = () => {
             toast.success("Loged Out Successfully", { position: "top-center" })
             dispatch(disconnectSocket());
             dispatch(resetstate());
-            dispatch(checkauth());
         } catch (error) {
             console.log(error)
         }
