@@ -37,7 +37,7 @@ const Sidebar = () => {
                             onClick={() => dispatch(setSelecteduser(user))}
                             >
                                 <div className='relative'>
-                                    <img src={user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full  size-[100%] sm:size-[55px] ' />
+                                    <img src={user.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full  w-[100%] aspect-square sm:size-[55px] ' />
                                     <div className={onlineusers?.includes(user._id) ?'rounded-full bg-green-600 size-3 absolute bottom-0 right-1' : "hidden"}></div>
                                 </div>
                                 <div className='flex flex-col gap-0 hidden md:block'>
