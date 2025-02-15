@@ -101,7 +101,7 @@ export const msgSlice = createSlice({
                 <button className='' onClick={() => state.selecteduser = action.payload.sender }>
                     {action.payload.text}
                 </button>
-            ), { position: "bottom-right" });
+            ), { position: "top-right" });
         }
     },
     extraReducers: (builder) => {
