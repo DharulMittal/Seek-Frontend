@@ -22,7 +22,7 @@ const LoadingMsgs = () => {
                         </div>
                         <div className='flex flex-col'>
                             <div className=' text-lg text-start'>{selecteduser.username}</div>
-                            <p className='text-sm text-start'>Onlien</p>
+                            <p className='text-sm text-start'>Online</p>
                         </div>
                     </div>
                     <button className='' onClick={() => dispatch(setSelecteduser(null))}>
