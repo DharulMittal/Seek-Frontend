@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import "../Styles/component.css"
 import { NavLink } from 'react-router';
 import toast from 'react-hot-toast';
@@ -73,7 +74,23 @@ const Loginpage = () => {
 
         </form>
 
-        <div className='text-center'>
+        <div className='flex justify-center my-3'>
+          <div className='border-t border-base-300 w-1/3'></div>
+          <div className='mx-4 text-base-content/70 -mt-3'>OR</div>
+          <div className='border-t border-base-300 w-1/3'></div>
+        </div>
+
+        <div className='flex justify-around my-[5px]'>
+          <a 
+            href={`${import.meta.env.VITE_API_URL}api/auth/google`}
+            className='flex items-center justify-center gap-2 border border-base-300 rounded-lg py-2 px-4 w-[70%] hover:bg-base-300 transition-colors'
+          >
+            <FcGoogle className="text-2xl" />
+            <span>Continue with Google</span>
+          </a>
+        </div>
+
+        <div className='text-center mt-3'>
           Don't have an account <NavLink to='/Signup' className='text-blue-500'>Signup</NavLink>
         </div>
 
