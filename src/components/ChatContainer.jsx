@@ -101,7 +101,7 @@ const ChatContainer = () => {
 
   return (
     <>
-      <div className='w-[100%] relative flex flex-col justify-between '>
+      <div className='w-[100%] flex flex-col justify-between relative top-0'>
 
         <div className='flex justify-between bg-base-300 text-base-content w-[100%] py-1 items-center px-[1%] border-[2px] border-base-300 shadow-sm'>
 
@@ -188,7 +188,7 @@ const ChatContainer = () => {
                         )
                       }} />
                     ) : (
-                      <p>{msg.text}</p>
+                      <p className="overflow-x-auto">{msg.text}</p>
                     )
                   )}
                 </div>
@@ -201,7 +201,9 @@ const ChatContainer = () => {
           )}
         </div>
 
-        <div className='relative'>
+        {/* <div className='w-[100%]'> */}
+        {/* <div className='sticky bottom-0 w-[100%]'> */}
+        <div className='w-[100%]'>
           <Inputbox />
         </div>
       </div>

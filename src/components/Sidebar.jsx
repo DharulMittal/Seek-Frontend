@@ -86,7 +86,7 @@ const Sidebar = () => {
                     />
                 </div>
 
-                <div className='overflow-y-auto overflow-x-hidden py-2 h-[92%]'>
+                <div className='overflow-y-auto overflow-x-hidden py-2 h-[80vh] md:h-[94vh]'>
                     {filteredUsers.length === 0 ? (
                         <div className="text-center text-gray-500 mt-4">
                             No users found
@@ -102,19 +102,12 @@ const Sidebar = () => {
                                     <img 
                                         src={user.pfp || "/avatar.png"} 
                                         alt="pfp" 
-                                        className='border-4 border-base-300 object-cover rounded-full md:w-[55px] md:h-[55px] md:min-w-[55px] w-[45px] h-[45px] min-w-[45px]' 
+                                        className='border-4 border-base-300 object-cover rounded-full md:w-[55px] md:h-[55px] md:min-w-[55px] w-[55px] h-[55px] min-w-[55px]' 
                                     />
                                     <div className={onlineusers?.includes(user._id) ? 'rounded-full bg-green-600 size-3 absolute bottom-0 right-1' : "hidden"}></div>
                                 </div>
-                                <div className='md:flex flex-col gap-0 hidden overflow-hidden w-full'>
+                                <div className='md:flex flex-col gap-0 overflow-hidden w-full'>
                                     <div className='text-lg text-start truncate max-w-full'>{user.username}</div>
-                                    <p className='text-xs text-start truncate max-w-full px-0'>
-                                        {onlineusers?.includes(user._id) ? "Online" : "Offline"}
-                                    </p>
-                                </div>
-                                {/* Mobile view */}
-                                <div className='flex flex-col gap-0 md:hidden w-full overflow-hidden'>
-                                    <div className='text-base text-start truncate max-w-full'>{user.username}</div>
                                     <p className='text-xs text-start truncate max-w-full px-0'>
                                         {onlineusers?.includes(user._id) ? "Online" : "Offline"}
                                     </p>
