@@ -15,7 +15,7 @@ const Homepage = () => {
         <Sidebar />
         {!selecteduser? <NoChat />:<ChatContainer/>}
       </div>
-      <div className='h-[90vh] flex md:hidden'>
+      <div className='h-[88vh] flex md:hidden'>
         {!selecteduser? <Sidebar />:<ChatContainer/>}
       </div>
     </>

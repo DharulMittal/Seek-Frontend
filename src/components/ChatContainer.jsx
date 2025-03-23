@@ -202,8 +202,8 @@ const ChatContainer = () => {
         </div>
 
         {/* <div className='w-[100%]'> */}
-        {/* <div className='sticky bottom-0 w-[100%]'> */}
-        <div className='w-[100%]'>
+        <div className='sticky bottom-0 w-[100%]'>
+        {/* <div className='w-[100%]'> */}
           <Inputbox />
         </div>
       </div>

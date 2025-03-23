@@ -60,7 +60,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className='w-[100vw] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm'>
+            <div className='w-[100vw] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm h-[88vh] md:h-[94vh]'>
                 <div className='flex justify-between items-center px-5 py-2'>
                     <div className='flex gap-2 items-center'>
                         <HiUserGroup className='h-6 w-6 flex flex-col justify-center' />
@@ -86,7 +86,7 @@ const Sidebar = () => {
                     />
                 </div>
 
-                <div className='overflow-y-auto overflow-x-hidden py-2 h-[80vh] md:h-[94vh]'>
+                <div className='overflow-y-auto overflow-x-hidden py-2'>
                     {filteredUsers.length === 0 ? (
                         <div className="text-center text-gray-500 mt-4">
                             No users found
