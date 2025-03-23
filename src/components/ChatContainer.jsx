@@ -7,6 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import LoadingMsgs from './Loding/LoadingMsgs';
 import Inputbox from './Inputbox';
 import { FaSearch } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 // Custom debounce hook
 const useDebounce = (value, delay) => {
@@ -106,6 +107,10 @@ const ChatContainer = () => {
 
           <div className='flex gap-2 items-center'>
             <div>
+            <IoMdArrowRoundBack className='h-6 w-6 md:hidden' onClick={() => dispatch(setSelecteduser(null))}/>
+
+            </div>
+            <div>
               <img src={selecteduser.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full size-[55px] ' />
             </div>
             <div className='flex flex-col'>
@@ -139,7 +144,7 @@ const ChatContainer = () => {
             >
               {isSearchVisible ? <IoMdClose className='h-6 w-6' /> : <FaSearch className='h-4 w-4' />}
             </button>
-            <button className='' onClick={() => dispatch(setSelecteduser(null))}>
+            <button className='hidden md:block' onClick={() => dispatch(setSelecteduser(null))}>
               <IoClose className='h-6 w-6' />
             </button>
           </div>

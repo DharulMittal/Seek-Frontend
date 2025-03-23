@@ -60,7 +60,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className='w-[17.5%] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm'>
+            <div className='w-[100vw] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm'>
                 <div className='flex justify-between items-center px-5 py-2'>
                     <div className='flex gap-2 items-center'>
                         <HiUserGroup className='h-6 w-6 flex flex-col justify-center' />
@@ -106,15 +106,18 @@ const Sidebar = () => {
                                     />
                                     <div className={onlineusers?.includes(user._id) ? 'rounded-full bg-green-600 size-3 absolute bottom-0 right-1' : "hidden"}></div>
                                 </div>
-                                <div className='flex flex-col gap-0 hidden md:block overflow-hidden w-full'>
+                                <div className='md:flex flex-col gap-0 hidden overflow-hidden w-full'>
                                     <div className='text-lg text-start truncate max-w-full'>{user.username}</div>
-                                    <p className='text-sm text-start truncate max-w-full'>
+                                    <p className='text-xs text-start truncate max-w-full px-0'>
                                         {onlineusers?.includes(user._id) ? "Online" : "Offline"}
                                     </p>
                                 </div>
                                 {/* Mobile view */}
                                 <div className='flex flex-col gap-0 md:hidden w-full overflow-hidden'>
                                     <div className='text-base text-start truncate max-w-full'>{user.username}</div>
+                                    <p className='text-xs text-start truncate max-w-full px-0'>
+                                        {onlineusers?.includes(user._id) ? "Online" : "Offline"}
+                                    </p>
                                 </div>
                             </button>
                         ))

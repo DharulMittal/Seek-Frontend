@@ -10,10 +10,15 @@ const Homepage = () => {
   const {  selecteduser } = useSelector((state) => state.msg);
 
   return (
-    <div className='h-[95vh] flex'>
-      <Sidebar />
-      {!selecteduser? <NoChat />:<ChatContainer/>}
-    </div>
+    <>
+      <div className=' hidden md:h-[94vh] md:flex'>
+        <Sidebar />
+        {!selecteduser? <NoChat />:<ChatContainer/>}
+      </div>
+      <div className='h-[90vh] flex md:hidden'>
+        {!selecteduser? <Sidebar />:<ChatContainer/>}
+      </div>
+    </>
   )
 }
 
