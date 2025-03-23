@@ -60,8 +60,8 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className='w-[100vw] md:w-[25%] bg-base-200 overflow-y-hidden text-base-content border-[2px] border-base-300 shadow-sm h-[88vh] md:h-[94vh]'>
-                <div className='flex justify-between items-center px-5 py-2'>
+            <div className='w-[100vw] md:w-[25%] bg-base-200 overflow-y-auto text-base-content border-[2px] border-base-300 shadow-sm relative top-0'>
+                <div className='flex justify-between items-center px-5 py-2 sticky top-0 bg-base-200 z-10'>
                     <div className='flex gap-2 items-center'>
                         <HiUserGroup className='h-6 w-6 flex flex-col justify-center' />
                         <div className='text-xl font-semibold hidden md:inline-block'>Chats</div>
@@ -78,7 +78,7 @@ const Sidebar = () => {
                 {/* Search Input - Always visible on mobile, toggle on desktop */}
                 <div className={`px-[5px] ${isSearchVisible ? 'md:block' : 'md:hidden'} mb-1`}>
                     <input 
-                        className='flex justify-between myinputbox w-full text-left px-[20px] rounded-xl bg-base-100/25 border-base-300 border-[1px]'
+                        className='flex justify-between myinputbox w-full text-left px-[20px] rounded-xl bg-base-100/25 border-base-300 border-[1px] '
                         type="text"
                         value={searchUser}
                         onChange={(e) => setSearchUser(e.target.value)}
