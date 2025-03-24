@@ -58,11 +58,39 @@ export const livemsgs = createAsyncThunk(
         try {
             const state = getState();
             const socketvar = state.auth.socketvar;
-
-            socketvar.on("newmsgs", (message) => {
+            const permission = state.auth.notipermission;
+            
+            socketvar.on("newmsgs", async (message) => {
                 const msg = message;
+                var user = {};
+                if (msg.sender) {
+                    user = await axiosInstance.post(`api/auth/userinfo`,{"id": msg.sender});
+                    user = user.data;
+                }
+                
                 dispatch(setmsgs(msg));
-                // console.log(msg)
+                
+                const currentState = getState();
+                const currentSelectedUser = currentState.msg.selecteduser;
+                
+                // Only show notification if the sender is not currently selected
+                const isCurrentlyChatting = currentSelectedUser && currentSelectedUser._id === msg.sender;
+                if (permission === "granted" && !isCurrentlyChatting) {
+                    const notification = new Notification(user.username || msg.sender, {
+                        body: msg.text,
+                        icon: user.pfp || null,
+                    });
+                    
+                    // Add click event handler to the notification
+                    notification.onclick = function() {
+                        // Focus the window
+                        window.focus();
+                        // Set the selected user to open their chat
+                        dispatch(setSelecteduser(user));
+                        // Close the notification
+                        this.close();
+                    };
+                }
             });
 
         } catch (error) {
@@ -71,6 +99,7 @@ export const livemsgs = createAsyncThunk(
         }
     }
 )
+
 export const offlivemsgs = createAsyncThunk(
     'msg/offlivemsgs',
     async (url, { dispatch, getState, rejectWithValue }) => {
@@ -78,7 +107,7 @@ export const offlivemsgs = createAsyncThunk(
             const state = getState();
             const socketvar = state.auth.socketvar;
 
-            socketvar.iff("newmsgs");
+            socketvar.off("newmsgs");
 
         } catch (error) {
             console.log(error);
@@ -96,12 +125,12 @@ export const msgSlice = createSlice({
         },
         setmsgs: (state, action) => {
             state.msgs = [...state.msgs, action.payload];
-            // toast.success(action.payload.sender+"\n"+action.payload.text,{position:"bottom-right"})     
-            toast((t) => (
-                <button className='' onClick={() => state.selecteduser = action.payload.sender }>
-                    {action.payload.text}
-                </button>
-            ), { position: "top-right" });
+                
+            // toast((t) => (
+            //     <button className='' onClick={() => state.selecteduser = action.payload.sender }>
+            //         {action.payload.text}
+            //     </button>
+            // ), { position: "top-right" });
         }
     },
     extraReducers: (builder) => {

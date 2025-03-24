@@ -7,6 +7,7 @@ const initialState = {
     onlineusers: [],
     socketvar: null,
     loading: true,
+    notipermission: "default",
 }
 
 export const checkauth = createAsyncThunk(
@@ -40,13 +41,33 @@ export const disconnectSocket = createAsyncThunk(
     }
 )
 
+export const requestNotificationPermission = createAsyncThunk(
+    'auth/requestNotificationPermission',
+    async (_, { dispatch }) => {
+        if (!("Notification" in window)) {
+            return "not-supported";
+        }
+        
+        let permission = Notification.permission;
+        
+        if (permission === "default") {
+            permission = await Notification.requestPermission();
+        }
+        
+        return permission;
+    }
+)
+
 export const connectSocket = createAsyncThunk(
     'auth/connectSocket',
-    async (url, { dispatch,getState,rejectWithValue }) => {
+    async (url, { dispatch, getState, rejectWithValue }) => {
         try {
             const state = getState();
             const user = state.auth.user;
             const socketvar = state.auth.socketvar;
+            
+            // Request notification permission when connecting socket
+            dispatch(requestNotificationPermission());
             
             if (socketvar?.connected){
                 return null
@@ -91,7 +112,10 @@ export const authSlice = createSlice({
         },
         setOnlineusers(state, action) {
             state.onlineusers = action.payload;
-          },
+        },
+        setnotipermission: (state, action) => {
+            state.notipermission = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -121,9 +145,14 @@ export const authSlice = createSlice({
                     state.socketvar = socketvar;
                 }
             })
+
+        builder
+            .addCase(requestNotificationPermission.fulfilled, (state, action) => {
+                state.notipermission = action.payload;
+            });
     }
 });
 
-export const { resetstate, setuser,setOnlineusers } = authSlice.actions;
+export const { resetstate, setuser, setOnlineusers, setnotipermission } = authSlice.actions;
 
 export default authSlice.reducer;

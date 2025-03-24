@@ -14,7 +14,7 @@ import Navbar from './components/Navbar.jsx';
 import { livemsgs } from './Redux/message/msgSlice.jsx';
 
 function App() {
-  const { user, loading } = useSelector((state) => state.auth);
+  const { user, loading, notipermission } = useSelector((state) => state.auth);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   // let navigate = useNavigate();
@@ -32,7 +32,6 @@ function App() {
       }
     };
     initialize();    
-
   }, [dispatch]);
 
   if (loading) {

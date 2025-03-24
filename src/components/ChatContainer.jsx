@@ -8,6 +8,7 @@ import LoadingMsgs from './Loding/LoadingMsgs';
 import Inputbox from './Inputbox';
 import { FaSearch } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoIosCall } from "react-icons/io";
 
 // Custom debounce hook
 const useDebounce = (value, delay) => {
@@ -108,7 +109,6 @@ const ChatContainer = () => {
           <div className='flex gap-2 items-center'>
             <div>
             <IoMdArrowRoundBack className='h-6 w-6 md:hidden' onClick={() => dispatch(setSelecteduser(null))}/>
-
             </div>
             <div>
               <img src={selecteduser.pfp || "/avatar.png"} alt="pfp" className='border-4 border-base-300 object-cover rounded-full size-[55px] ' />
@@ -121,6 +121,10 @@ const ChatContainer = () => {
             </div>
           </div>
           <div className='flex gap-2 items-center'>
+            <button onClick={toggleSearch}
+              className="p-2 hover:bg-base-200 rounded-full transition-all">
+              <IoIosCall className='h-5 w-5'/>
+            </button>
             {isSearchVisible && (
               <div className='relative transition-all duration-300 ease-in-out'>
                 <input
