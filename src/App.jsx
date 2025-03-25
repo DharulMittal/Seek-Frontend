@@ -41,7 +41,7 @@ function App() {
   }
 
   return (
-    <div data-theme={theme} className='relative h-screen flex flex-col overflow-hidden'>
+    <div data-theme={theme} className='relative md:h-screen flex flex-col overflow-hidden'>
       <Navbar />
       <div className="flex-1 overflow-hidden">
         <Routes>

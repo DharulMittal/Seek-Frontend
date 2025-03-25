@@ -1,27 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import NoChat from '../components/NoChat'
 import ChatContainer from '../components/ChatContainer'
-import { setSelecteduser, getusers } from '../Redux/message/msgSlice'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const Homepage = () => {
   const { selecteduser } = useSelector((state) => state.msg);
+  const [isScreenSmall, setisScreenSmall] = useState(window.innerWidth > 768)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setisScreenSmall(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <>
-      {/* Desktop/tablet view */}
-      <div className='hidden md:flex md:h-[calc(100vh-3rem)] md:w-full overflow-hidden relative'>
-        <Sidebar />
-        {!selecteduser ? <NoChat /> : <ChatContainer />}
-      </div>
-      
-      {/* Mobile view */}
-      <div className='flex h-[calc(100vh-3rem)] w-full md:hidden overflow-hidden relative'>
+    isScreenSmall ? <div className='flex h-[calc(100vh-3rem)] w-full overflow-hidden relative'>
+      <Sidebar />
+      {!selecteduser ? <NoChat /> : <ChatContainer />}
+    </div>
+      :
+      <div className='flex h-[88vh] w-full overflow-hidden relative'>
         {!selecteduser ? <Sidebar /> : <ChatContainer />}
       </div>
-    </>
   )
 }
 
