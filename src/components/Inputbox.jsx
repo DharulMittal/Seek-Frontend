@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { IoMdSend } from "react-icons/io";
 import { AiFillPicture } from "react-icons/ai";
@@ -11,17 +11,18 @@ const Inputbox = () => {
     const [previewImg, setpreviewImg] = useState(null)
     const [msgtext, setmsgtext] = useState("")
 
-    const { selecteduser,sending } = useSelector((state) => state.msg);
+    const { selecteduser, sending } = useSelector((state) => state.msg);
     const dispatch = useDispatch();
 
 
     const handleSendImg = async (e) => {
         const file = e.target.files[0];
+        if (!file) return;
+        
         if (!file.type.startsWith("image/")) {
             toast.error("Please select an image file");
             return;
           }
-        if (!file) return;
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = async () => {
@@ -46,7 +47,7 @@ const Inputbox = () => {
     }
 
     return (
-        <>
+        <div className='relative'>
             {
                 previewImg && (
                     <div className='mx-2 mb-1 absolute bottom-10 z-10'>
@@ -89,7 +90,7 @@ const Inputbox = () => {
                 </button>
 
             </div>
-        </>
+        </div>
     )
 }
 
