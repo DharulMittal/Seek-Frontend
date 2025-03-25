@@ -18,7 +18,7 @@ const Homepage = () => {
       </div>
       
       {/* Mobile view */}
-      <div className='flex h-[calc(100vh-3rem)] w-full md:hidden overflow-hidden relative'>
+      <div className='flex h-[88vh] w-full md:hidden overflow-hidden relative'>
         {!selecteduser ? <Sidebar /> : <ChatContainer />}
       </div>
     </>
