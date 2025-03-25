@@ -7,16 +7,19 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const Homepage = () => {
-  const {  selecteduser } = useSelector((state) => state.msg);
+  const { selecteduser } = useSelector((state) => state.msg);
 
   return (
     <>
-      <div className=' hidden md:h-[94vh] md:flex'>
+      {/* Desktop/tablet view */}
+      <div className='hidden md:flex md:h-[calc(100vh-3rem)] md:w-full overflow-hidden relative'>
         <Sidebar />
-        {!selecteduser? <NoChat />:<ChatContainer/>}
+        {!selecteduser ? <NoChat /> : <ChatContainer />}
       </div>
-      <div className='h-[88vh] flex md:hidden'>
-        {!selecteduser? <Sidebar />:<ChatContainer/>}
+      
+      {/* Mobile view */}
+      <div className='flex h-[calc(100vh-3rem)] w-full md:hidden overflow-hidden relative'>
+        {!selecteduser ? <Sidebar /> : <ChatContainer />}
       </div>
     </>
   )

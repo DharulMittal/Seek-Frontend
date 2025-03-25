@@ -35,22 +35,24 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen border-2 border-black">
+    return <div className="flex items-center justify-center h-screen">
       <BiLoaderAlt className="size-10 animate-spin" />
     </div>
   }
 
   return (
-    <div data-theme={theme} className='relative'>
+    <div data-theme={theme} className='relative h-screen flex flex-col overflow-hidden'>
       <Navbar />
-      <Routes>
-        <Route path='/' element={user.username ? <Homepage /> : <Navigate to="/login" />} />
-        {/* <Route path='/' element={user.username ? <Homepage /> : navigate("/login")} /> */}
-        <Route path='/login' element={!user.username ? <Loginpage /> : <Navigate to="/" />} />
-        <Route path='/signup' element={!user.username ? <Signup /> : <Navigate to="/" />} />
-        <Route path='/theme' element={<Theme />} />
-        <Route path='/profile' element={user.username ? <Profile /> : <Navigate to="/login" />} />
-      </Routes>
+      <div className="flex-1 overflow-hidden">
+        <Routes>
+          <Route path='/' element={user.username ? <Homepage /> : <Navigate to="/login" />} />
+          {/* <Route path='/' element={user.username ? <Homepage /> : navigate("/login")} /> */}
+          <Route path='/login' element={!user.username ? <Loginpage /> : <Navigate to="/" />} />
+          <Route path='/signup' element={!user.username ? <Signup /> : <Navigate to="/" />} />
+          <Route path='/theme' element={<Theme />} />
+          <Route path='/profile' element={user.username ? <Profile /> : <Navigate to="/login" />} />
+        </Routes>
+      </div>
       <Toaster />
     </div>
   )
